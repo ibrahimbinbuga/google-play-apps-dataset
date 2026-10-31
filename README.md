@@ -92,7 +92,9 @@ apps ──┬── developers     (developer_id = developer + domain pair)
 | Q10 | Productivity / Finance / Entertainment vs all apps | CTE + UNION ALL |
 
 ## Dashboard
-A local Streamlit dashboard ([`app/dashboard.py`](app/dashboard.py)) with three tabs (genre × monetization, install band × monetization, developer concentration) and filters for genre, game/app and install band. Every chart shows n, and a fixed note at the top states the sample design. It runs on `localhost` only and is not deployed publicly.
+A Streamlit dashboard ([`app/dashboard.py`](app/dashboard.py)) with three tabs (genre × monetization, install band × monetization, developer concentration) and filters for genre, game/app and install band. Every chart shows n, and a fixed note at the top states the sample design.
+
+The dashboard **never reads raw rows**. It reads one summary table, [`app/summary/developer_cells.csv.gz`](app/summary/), built by [`src/build_summaries.py`](src/build_summaries.py): app counts per developer × genre × install band × monetization (69,841 cells, n = 100,013). It has no app names or IDs. Developer names are shown only for developers with at least 20 apps in the sample (389 of 47,956); the rest appear as `Geliştirici #<number>`. This is why it can run without `data/` and can be deployed publicly.
 
 ```
 streamlit run app/dashboard.py
@@ -126,11 +128,12 @@ streamlit run app/dashboard.py
 
 ## Structure
 ```
-├── app/dashboard.py          Streamlit dashboard (local)
+├── app/dashboard.py          Streamlit dashboard (reads app/summary/ only)
+├── app/summary/              aggregated table for the dashboard (no app-level rows)
 ├── notebooks/analysis.ipynb  executed end-to-end notebook
 ├── sql/schema.sql            normalized SQLite schema
 ├── sql/queries.sql           10 SQL questions
-├── src/                      pipeline modules (validate, clean, sample_check, load_db, queries, figures)
+├── src/                      pipeline modules (validate, clean, sample_check, load_db, queries, figures, build_summaries)
 ├── figures/                  4 charts
 ├── data/                     raw and generated data (git-ignored)
 ├── DEVLOG.md                 decisions, assumptions and step log (Turkish)

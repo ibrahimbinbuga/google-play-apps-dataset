@@ -10,6 +10,7 @@ Başlangıç: 2026-10-30
 - 2026-10-30 | Veri tam verinin %9'u, geliştirici bazlı hash örneklemi | Sonuçlar tüm Google Play'e genelleştirilmez
 - 2026-10-30 | Lisans BY-NC-SA 4.0 kabul edildi (varsayım) | REPORT.md "CC BY-NC 4.0", Kaggle API "CC-BY-NC-SA-4.0" diyor, daha sıkı olan esas alındı
 - 2026-10-31 | Lisans CC BY-NC-SA 4.0 olarak teyit edildi | İbrahim Kaggle sayfasındaki lisans kutusuna baktı; varsayım kalktı
+- 2026-10-31 | Dashboard özet tablolarla herkese açık yayınlanacak (İbrahim kararı) | Uygulama düzeyi satır yayınlanmaz; < 20 uygulamalı geliştiricilerin adı gizlenir (gerçek kişi adı olabilir)
 - 2026-10-30 | `price` boş 13 satır silinmedi | Hepsi `free=False`, `monetization` için yeterli; fiyat analizinde dışarıda kalır
 - 2026-10-31 | Oyun olan Sports satırları (351) `Sports (Game)` türüne ayrıldı | Sports hem oyun hem uygulama; `genres (genre PK, is_game)` şeması tek değer istiyor. İbrahim onayladı
 - 2026-10-31 | Tür birleştirme yapılmadı | "Educational" ve "Music" yalnızca oyunlarda geçiyor, "Education" ve "Music & Audio"nun kopyası değil
@@ -146,6 +147,13 @@ Başlangıç: 2026-10-30
 - Yapılan: İbrahim Kaggle sayfasında lisansın CC BY-NC-SA 4.0 olduğunu teyit etti. README (lisans satırı ve atıf), TASK.md, `05-kalite-kontrol.md` ve notebook'un giriş hücresi güncellendi. Notebook yeniden çalıştırılmadı, yalnızca markdown hücresi değişti.
 - Süre: ~5 dk
 
+### 2026-10-31 | Dashboard: özet tablolara geçiş ve yayın hazırlığı
+- Yapılan: `src/build_summaries.py` → `app/summary/developer_cells.csv.gz` (repoda). Grain: geliştirici × tür × kurulum bandı × gelir modeli → n. `app/dashboard.py` artık yalnızca bu tabloyu okuyor (SQLite ve ham satır yok); sayımlar `n` toplamıyla yapılıyor. Alta veri kaynağı, lisans ve GitHub linki eklendi. Notebook'a Adım 8 hücresi eklendi (özet tabloyu üretir, `n` toplamı = 100,013 assert'i). Streamlit Cloud için `app/requirements.txt`. `.streamlit/config.toml`'dan `address = "localhost"` kaldırıldı (Cloud'da sunucu adresini platform yönetiyor; yayınlanan veri zaten özet).
+- Bulunan: Özet tablo 69,841 satır, 0.51 MB, n toplamı 100,013. 47,956 geliştiricinin 389'unun adı görünüyor (≥ 20 uygulama + genel etiket); anonim numara büyüklük sırasına göre verildi, veritabanı id'si değil. `data/` klasörü gizliyken AppTest sonuçları ham veriyle okunan sürümle birebir aynı (varsayılan 100,013 / 47,956 / %3.33 / 6,022; Oyun 14,728; Comics boş durum; Finance + 1,000,000+ 200 / 192 / %8.50). Filtreli ilk 10'da anonim geliştiriciler "Geliştirici #…" olarak görünüyor. Notebook 20/20 hücre, 0 hata.
+- Sorun: Kök `requirements.txt` jupyter/kaggle içerdiği ve Python 3.15'e göre sabitlendiği için Cloud'a uygun değil; Cloud giriş dosyasının klasöründeki `app/requirements.txt`'i önce kullanıyor. pandas 3.1.0'ın Linux wheel'i yalnızca manylinux_2_28 etiketiyle var; Python 3.12/3.13 için doğrulandı.
+- Süre: ~45 dk
+- Sonraki: İbrahim Streamlit Community Cloud'a bağlar, canlı link README'ye eklenir.
+
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)
 - Tipler: `is_game`, `free`, `contains_ads`, `offers_iap` bool olarak okunuyor. `score/ratings/reviews/price` float (eksik değer yüzünden `ratings/reviews` int değil). `released`, `last_updated` str, hepsi `YYYY-MM-DD` olarak sorunsuz parse ediliyor.
@@ -181,7 +189,6 @@ Başlangıç: 2026-10-30
 - Tür düzeyi oranları büyük geliştiricileri (klavye/tema hesapları, GPSmyCity) hariç tutarak yeniden hesaplamak (duyarlılık analizi).
 - (developer, domain) anahtarının aynı şirketi bölmesi (WABiz) için isim normalizasyonu.
 - Yedek soru 1 (reklamlı ve reklamsız ücretsiz uygulamaların puanı): puan yalnızca %31.75'te var ve ücretli tarafa kayık; ana soru dışında kaldı.
-- Dashboard'u herkese açık yayınlamak: özet tablolara geçiş ve yayın kararı İbrahim'de.
 
 ## LinkedIn için ham notlar
 - Açılış cümlesi (bulgu ile başla): Google Play'de 1,000+ kurulumlu uygulamaların yalnızca %5.6'sı reklam ve uygulama içi satın almayı birlikte kullanıyor; 10M+ kurulumda bu oran %56.

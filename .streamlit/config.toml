@@ -1,7 +1,6 @@
-# Dashboard yalnızca bu makineden erişilir. Herkese açık yayın İbrahim'in kararı.
-[server]
-address = "localhost"
-headless = true
-
+# Dashboard yalnızca özet tabloyu okur (ham veri yok), Streamlit Community Cloud'da yayınlanır.
 [browser]
 gatherUsageStats = false
+
+[theme]
+base = "light"

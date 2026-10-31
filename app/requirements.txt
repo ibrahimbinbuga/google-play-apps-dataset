@@ -1,0 +1,5 @@
+# Streamlit Community Cloud bu dosyayı (giriş dosyasının klasöründe) kök requirements.txt'den önce kullanır.
+# Dashboard yalnızca özet tabloyu okur; notebook/Kaggle paketlerine gerek yok.
+streamlit==1.66.1
+pandas==3.1.0
+altair==6.3.0

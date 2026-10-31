@@ -33,7 +33,8 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 ## Dashboard
 - [x] `streamlit run app/dashboard.py` yerelde çalışıyor (AppTest: 4 senaryo, exception 0; sağlık kontrolü HTTP 200)
 - [x] Üstte sabit örneklem notu, 3 sekme, 3 filtre, her grafikte n
-- [x] Sunucu yalnızca `localhost`'a bağlı (`.streamlit/config.toml`), herkese açık yayın yok
+- [x] Dashboard yalnızca özet tabloyu okuyor (`app/summary/developer_cells.csv.gz`): uygulama adı/ID yok, < 20 uygulamalı geliştirici adı gizli. `data/` gizliyken AppTest sayıları ham veriyle birebir aynı (100,013 / 47,956 / %3.33 / 6,022; Oyun 14,728; Finance + 1M+ 200 / 192 / %8.50)
+- [x] Streamlit Cloud için `app/requirements.txt` (streamlit, pandas, altair; Linux wheel'leri Python 3.12/3.13 için doğrulandı)
 - [ ] Tarayıcıda gözle kontrol: İbrahim'in bir kez açıp bakması gerekiyor
 
 ## Bulgu dili (kural 6, 11, 12)
@@ -46,5 +47,6 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 ## Açık kalanlar
 - [x] Repo: https://github.com/ibrahimbinbuga/google-play-apps-dataset (herkese açık, İbrahim onayladı, 2026-10-31)
 - [x] Notebook çıktıları (~976 KB, gömülü grafikler) repoda tutuldu; GitHub'da çalıştırmadan okunabilsin diye (ai-usage-data ile aynı karar)
-- [ ] Dashboard'u herkese açık yayınlama (özet tablolara geçiş gerekir), İbrahim'in kararı
+- [x] Dashboard'u herkese açık yayınlama: İbrahim özet tablolarla yayın kararı verdi (2026-10-31)
+- [ ] Streamlit Community Cloud'a bağlama (İbrahim'in hesabıyla, tarayıcıdan) ve canlı linki README'ye ekleme
 - [x] Lisans: Kaggle sayfasında CC BY-NC-SA 4.0 (İbrahim teyit etti, 2026-10-31). README, TASK ve notebook buna göre güncellendi
