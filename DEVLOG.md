@@ -178,6 +178,7 @@ Başlangıç: 2026-10-30
   - Notebook grafik hücresine 05 eklendi, baştan çalıştırıldı (20/20 hücre, 0 hata).
 - Bulunan: Dashboard'un özet tablodan hesapladığı grup oranları SQL ile birebir aynı (ör. Productivity 1M+ free_clean %25.1, n=195). AppTest: Productivity seçimi n = 4,720, iki görünüm de hatasız.
 - Sorun: Grafik 05'te ilk sürümde okuma notu tek satırda çok uzundu; satır bölme ile düzeltildi ve gözle kontrol edildi.
+- Yayın: Push sonrası Streamlit Cloud eski sürümde kaldı; İbrahim "Reboot app" ile yeniden başlattı, yeni görünüm canlıda doğrulandı. Not: Cloud otomatik güncellemesi takılırsa Manage app → Reboot app.
 - Süre: ~40 dk
 
 ## Veri kalite notları
