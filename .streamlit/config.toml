@@ -1,0 +1,7 @@
+# Dashboard yalnızca bu makineden erişilir. Herkese açık yayın İbrahim'in kararı.
+[server]
+address = "localhost"
+headless = true
+
+[browser]
+gatherUsageStats = false
