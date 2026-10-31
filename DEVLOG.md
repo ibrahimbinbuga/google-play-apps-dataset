@@ -160,6 +160,15 @@ Başlangıç: 2026-10-30
 - Sorun: Sayfa JavaScript ile çizildiği için içerik bu oturumda gözle kontrol edilemedi; İbrahim tarayıcıda açıp kontrol etti (uyarı notu, 3 sekme, filtreler ve n, geliştirici tablosu), sorun yok.
 - Süre: ~10 dk
 
+### 2026-10-31 | Yorum için ek kırılım ve LinkedIn taslağı
+- Yapılan: Yorum için tek bir ek sorgu çalıştırıldı (sqlite3, `queries.sql`'e eklenmedi): Productivity, Finance, Entertainment × kurulum bandı grubu (<100K = bant 1-4, 100K-1M = bant 5-6, 1M+ = bant 7-15) × gelir modeli; bir de oyun/uygulama ayrımı. LinkedIn taslağı `linkedin-post.txt`'e yazıldı (git dışı).
+- Bulunan:
+  - Productivity: free_clean <100K %68.2 (n=4,077) → 100K-1M %46.4 (n=448) → 1M+ %25.1 (n=195); ads_iap %6.7 → %19.9 → %36.4; iap_only %6.8 → %10.9 → %16.4. 1M+ grubunda n < 200, dikkatli okunmalı.
+  - Finance: free_clean tüm gruplarda yüksek kalıyor: %80.0 (n=3,747), %78.7 (n=726), %85.8 (n=274).
+  - Entertainment: free_clean %40.7 (n=3,808) → %17.3 (n=911) → %15.0 (n=387); yalnızca reklam her grupta en büyük ya da ikinci büyük pay (%46.0, %57.5, %44.7); ads_iap %7.2 → %27.6.
+  - Oyunlar (n=14,728) free_clean %10.5, reklam %78.9, IAP %44.7; uygulamalar (n=85,285) %56.1, %37.3, %14.0.
+- Süre: ~20 dk
+
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)
 - Tipler: `is_game`, `free`, `contains_ads`, `offers_iap` bool olarak okunuyor. `score/ratings/reviews/price` float (eksik değer yüzünden `ratings/reviews` int değil). `released`, `last_updated` str, hepsi `YYYY-MM-DD` olarak sorunsuz parse ediliyor.
