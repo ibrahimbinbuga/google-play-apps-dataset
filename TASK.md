@@ -3,7 +3,7 @@
 ## Bağlam
 - Kaggle linki: https://www.kaggle.com/datasets/fliarbi/google-play-apps-2026
 - Dosya: `google_play_apps_2026_sample.csv`
-- Lisans: ÇELİŞKİLİ (Adım 2). REPORT.md "CC BY-NC 4.0" diyor, Kaggle API (`kaggle datasets download` çıktısı) "CC-BY-NC-SA-4.0" diyor. Daha sıkı olan (BY-NC-SA: ticari kullanım yok, atıf zorunlu, türev aynı lisansla paylaşılır) esas alınır. Ticari kullanım yok, atıf zorunlu.
+- Lisans: CC BY-NC-SA 4.0 (Kaggle sayfasındaki lisans kutusuyla İbrahim teyit etti, 2026-10-31; Kaggle API de aynı). REPORT.md "CC BY-NC 4.0" diyor, Kaggle esas alınır. Ticari kullanım yok, atıf zorunlu, türev aynı lisansla paylaşılır.
 - Seviye: 2 (SQL + dashboard)
 - Süre bütçesi: 2 hafta, haftada 4-5 saat
 

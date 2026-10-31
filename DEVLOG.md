@@ -9,6 +9,7 @@ Başlangıç: 2026-10-30
 - 2026-10-30 | `monetization`: `free = False` ise `paid`, diğerleri reklam/IAP kombinasyonu | Ücretli uygulama tek kategoriye indirgendi
 - 2026-10-30 | Veri tam verinin %9'u, geliştirici bazlı hash örneklemi | Sonuçlar tüm Google Play'e genelleştirilmez
 - 2026-10-30 | Lisans BY-NC-SA 4.0 kabul edildi (varsayım) | REPORT.md "CC BY-NC 4.0", Kaggle API "CC-BY-NC-SA-4.0" diyor, daha sıkı olan esas alındı
+- 2026-10-31 | Lisans CC BY-NC-SA 4.0 olarak teyit edildi | İbrahim Kaggle sayfasındaki lisans kutusuna baktı; varsayım kalktı
 - 2026-10-30 | `price` boş 13 satır silinmedi | Hepsi `free=False`, `monetization` için yeterli; fiyat analizinde dışarıda kalır
 - 2026-10-31 | Oyun olan Sports satırları (351) `Sports (Game)` türüne ayrıldı | Sports hem oyun hem uygulama; `genres (genre PK, is_game)` şeması tek değer istiyor. İbrahim onayladı
 - 2026-10-31 | Tür birleştirme yapılmadı | "Educational" ve "Music" yalnızca oyunlarda geçiyor, "Education" ve "Music & Audio"nun kopyası değil
@@ -140,6 +141,10 @@ Başlangıç: 2026-10-30
 - Kararlar: repo herkese açık (İbrahim seçti). Notebook çıktıları repoda tutuldu. `data/` repoya girmedi. Dashboard yayınlanmadı, yalnızca kodu repoda.
 - Sorun: Herkese açık repo oluşturma adımı önce izin sisteminde onaya takıldı, İbrahim'e soruldu ve onaylandı.
 - Süre: ~20 dk
+
+### 2026-10-31 | Lisans teyidi
+- Yapılan: İbrahim Kaggle sayfasında lisansın CC BY-NC-SA 4.0 olduğunu teyit etti. README (lisans satırı ve atıf), TASK.md, `05-kalite-kontrol.md` ve notebook'un giriş hücresi güncellendi. Notebook yeniden çalıştırılmadı, yalnızca markdown hücresi değişti.
+- Süre: ~5 dk
 
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)

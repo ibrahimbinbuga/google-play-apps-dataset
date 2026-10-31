@@ -47,4 +47,4 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 - [x] Repo: https://github.com/ibrahimbinbuga/google-play-apps-dataset (herkese açık, İbrahim onayladı, 2026-10-31)
 - [x] Notebook çıktıları (~976 KB, gömülü grafikler) repoda tutuldu; GitHub'da çalıştırmadan okunabilsin diye (ai-usage-data ile aynı karar)
 - [ ] Dashboard'u herkese açık yayınlama (özet tablolara geçiş gerekir), İbrahim'in kararı
-- [ ] Lisans çelişkisi (Kaggle BY-NC-SA vs REPORT.md BY-NC): Kaggle sayfasındaki lisans kutusuna gözle bakılmalı
+- [x] Lisans: Kaggle sayfasında CC BY-NC-SA 4.0 (İbrahim teyit etti, 2026-10-31). README, TASK ve notebook buna göre güncellendi

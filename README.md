@@ -139,5 +139,5 @@ streamlit run app/dashboard.py
 
 ## Data and license
 - Source: [Google Play Apps 2026 on Kaggle](https://www.kaggle.com/datasets/fliarbi/google-play-apps-2026). The data is not included in this repo.
-- License: the Kaggle API lists **CC BY-NC-SA 4.0**, the bundled REPORT.md says CC BY-NC 4.0. This project follows the stricter one: non-commercial use, attribution required, share-alike. The charts and tables here are derived from that data and are shared under the same terms.
-- Citation: Fliar Research (2026). *Google Play Apps 2026 (1.1M apps, 1K+ installs)* (sample release). Licence CC BY-NC 4.0.
+- License: **CC BY-NC-SA 4.0** (as listed on the Kaggle page): non-commercial use, attribution required, share-alike. The charts and tables here are derived from that data and are shared under the same terms. The REPORT.md bundled with the download says CC BY-NC 4.0; the Kaggle listing is followed.
+- Citation: Fliar Research (2026). *Google Play Apps 2026 (1.1M apps, 1K+ installs)* (sample release). Licence CC BY-NC-SA 4.0.
