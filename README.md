@@ -2,6 +2,8 @@
 
 ![Python](https://img.shields.io/badge/python-3.15-blue) ![pandas](https://img.shields.io/badge/pandas-3.1-150458) ![SQLite](https://img.shields.io/badge/SQLite-10%20queries-003B57) ![Streamlit](https://img.shields.io/badge/Streamlit-1.66-FF4B4B) ![Data license](https://img.shields.io/badge/data-CC%20BY--NC--SA%204.0-lightgrey)
 
+[![Open the dashboard](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-play-apps-dataset.streamlit.app)
+
 > **Sample, not the whole store.** The data is a 9% developer-level hash sample of Google Play (100,013 of 1,101,050 apps): every app of the selected developers is included, so it is not a random sample of apps. US storefront, June 2026 snapshot, Android only. All findings are associations within this sample, not causes.
 
 **Question:** How does the monetization model (ads, in-app purchases, paid, none) vary by genre and install band on Google Play?
@@ -92,6 +94,8 @@ apps ──┬── developers     (developer_id = developer + domain pair)
 | Q10 | Productivity / Finance / Entertainment vs all apps | CTE + UNION ALL |
 
 ## Dashboard
+**Live: [app-play-apps-dataset.streamlit.app](https://app-play-apps-dataset.streamlit.app)**
+
 A Streamlit dashboard ([`app/dashboard.py`](app/dashboard.py)) with three tabs (genre × monetization, install band × monetization, developer concentration) and filters for genre, game/app and install band. Every chart shows n, and a fixed note at the top states the sample design.
 
 The dashboard **never reads raw rows**. It reads one summary table, [`app/summary/developer_cells.csv.gz`](app/summary/), built by [`src/build_summaries.py`](src/build_summaries.py): app counts per developer × genre × install band × monetization (69,841 cells, n = 100,013). It has no app names or IDs. Developer names are shown only for developers with at least 20 apps in the sample (389 of 47,956); the rest appear as `Geliştirici #<number>`. This is why it can run without `data/` and can be deployed publicly.

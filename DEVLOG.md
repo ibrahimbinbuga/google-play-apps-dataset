@@ -154,6 +154,12 @@ Başlangıç: 2026-10-30
 - Süre: ~45 dk
 - Sonraki: İbrahim Streamlit Community Cloud'a bağlar, canlı link README'ye eklenir.
 
+### 2026-10-31 | Dashboard yayında
+- Yapılan: İbrahim uygulamayı Streamlit Community Cloud'a bağladı: https://app-play-apps-dataset.streamlit.app. README'ye rozet ve canlı link, kontrol listesine kayıt eklendi.
+- Bulunan: Anonim istek önce Cloud'un çerez/giriş yönlendirmesinden geçiyor (303), çerezle sayfa 200 dönüyor; uygulamanın kendi sağlık kontrolü (`/~/+/_stcore/health`) `ok`. Yani giriş gerekmeden açık.
+- Sorun: Sayfa JavaScript ile çizildiği için içerik bu oturumda gözle kontrol edilmedi.
+- Süre: ~10 dk
+
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)
 - Tipler: `is_game`, `free`, `contains_ads`, `offers_iap` bool olarak okunuyor. `score/ratings/reviews/price` float (eksik değer yüzünden `ratings/reviews` int değil). `released`, `last_updated` str, hepsi `YYYY-MM-DD` olarak sorunsuz parse ediliyor.
@@ -192,6 +198,7 @@ Başlangıç: 2026-10-30
 
 ## LinkedIn için ham notlar
 - Açılış cümlesi (bulgu ile başla): Google Play'de 1,000+ kurulumlu uygulamaların yalnızca %5.6'sı reklam ve uygulama içi satın almayı birlikte kullanıyor; 10M+ kurulumda bu oran %56.
+- Canlı dashboard: https://app-play-apps-dataset.streamlit.app
 - Öne çıkan grafik: `figures/01_band_monetization.png` (kurulum bandı × gelir modeli). Yedek: `02_genre_monetization.png` (oyunlar vs Business/Finance).
 - Tek cümlelik ders: Örneklem genel oranlarda tam veriyle uyuşsa bile, tek tip çalışan birkaç büyük geliştirici tür düzeyindeki tabloyu değiştirebilir.
 - Notlar: 100,013 uygulama, %9 geliştirici bazlı örneklem, ABD/Haziran 2026, Android. Araçlar: pandas, SQLite (10 soru), Streamlit. Lisans CC BY-NC-SA 4.0, ticari kullanım yok, kaynak atfı şart. "Reklam büyümeyi sağlıyor" gibi nedensel cümle kurma.

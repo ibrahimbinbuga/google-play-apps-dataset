@@ -48,5 +48,5 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 - [x] Repo: https://github.com/ibrahimbinbuga/google-play-apps-dataset (herkese açık, İbrahim onayladı, 2026-10-31)
 - [x] Notebook çıktıları (~976 KB, gömülü grafikler) repoda tutuldu; GitHub'da çalıştırmadan okunabilsin diye (ai-usage-data ile aynı karar)
 - [x] Dashboard'u herkese açık yayınlama: İbrahim özet tablolarla yayın kararı verdi (2026-10-31)
-- [ ] Streamlit Community Cloud'a bağlama (İbrahim'in hesabıyla, tarayıcıdan) ve canlı linki README'ye ekleme
+- [x] Streamlit Community Cloud'da yayında: https://app-play-apps-dataset.streamlit.app (İbrahim bağladı; giriş yapmadan sağlık kontrolü `ok`). Link README'de
 - [x] Lisans: Kaggle sayfasında CC BY-NC-SA 4.0 (İbrahim teyit etti, 2026-10-31). README, TASK ve notebook buna göre güncellendi
