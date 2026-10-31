@@ -1,5 +1,6 @@
 """Adım 7: figures/ altına kaydedilen grafikler. Her grafik başlık, eksen, birim, n ve okuma notu taşır."""
 import sqlite3
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -70,6 +71,22 @@ FROM apps AS a JOIN install_bands AS b USING (installs)
 GROUP BY 1, 2 ORDER BY 1
 """
 
+# Kurulum bandı grupları: <100K = bant 1-4, 100K-1M = bant 5-6, 1M+ = bant 7-15.
+SIZE_GROUP_CASE = """CASE WHEN b.band_rank <= 4 THEN '<100K' WHEN b.band_rank <= 6 THEN '100K-1M' ELSE '1M+' END"""
+FOCUS_GENRES = ["Productivity", "Finance", "Entertainment"]
+
+SQL_FOCUS_SIZE = f"""
+SELECT
+    a.genre,
+    {SIZE_GROUP_CASE} AS size_group,
+    MIN(b.band_rank) AS first_rank,
+    COUNT(*) AS n,
+    {_PCT_COLS}
+FROM apps AS a JOIN install_bands AS b USING (installs)
+WHERE a.genre IN ({", ".join(f"'{g}'" for g in FOCUS_GENRES)})
+GROUP BY a.genre, size_group
+"""
+
 
 def query(sql: str, db_path: Path = DB) -> pd.DataFrame:
     with sqlite3.connect(db_path) as con:
@@ -80,7 +97,7 @@ def _finish(fig, ax, title: str, note: str, path: Path) -> None:
     # Başlık lejantın üstünde, okuma notu x ekseni etiketinin altında; ikisi de eksene bağlı.
     ax.set_title(title, loc="left", fontsize=13, fontweight="bold", pad=30)
     ax.annotate(
-        f"Okuma: {note}\n{SAMPLE_NOTE}", xy=(0, 0), xycoords=("axes fraction", ax.xaxis.label), xytext=(0, -10),
+        textwrap.fill(f"Okuma: {note}", 150) + f"\n{SAMPLE_NOTE}", xy=(0, 0), xycoords=("axes fraction", ax.xaxis.label), xytext=(0, -10),
         textcoords="offset points", ha="left", va="top", fontsize=8.5, color=TEXT_2,
     )
     ax.grid(axis="x", color=GRID, linewidth=0.8)
@@ -176,6 +193,30 @@ def fig_stale_by_band(path: Path = FIG_DIR / "04_stale_by_band.png") -> pd.DataF
     return t
 
 
+def fig_focus_by_size(path: Path = FIG_DIR / "05_focus_genres_by_size.png") -> pd.DataFrame:
+    t = query(SQL_FOCUS_SIZE)
+    t["genre_order"] = t["genre"].map({g: i for i, g in enumerate(FOCUS_GENRES)})
+    t = t.sort_values(["genre_order", "first_rank"]).reset_index(drop=True)
+    labels = [f"{g} · {s}  (n={n:,})" for g, s, n in zip(t["genre"], t["size_group"], t["n"])]
+    fig, ax = plt.subplots(figsize=(10, 5.4))
+    stacked_share(ax, t, labels)
+    for boundary in (2.5, 5.5):
+        ax.axhline(boundary, color=TEXT_2, linewidth=0.8)
+    ax.set_ylabel("Tür · kurulum bandı grubu")
+    p = t.set_index(["genre", "size_group"])
+    small = t.loc[t["n"] < MIN_GENRE_N, ["genre", "size_group", "n"]]
+    small_note = "".join(f" {g} {s} grubunda n={n} (< {MIN_GENRE_N}), dikkatli okunmalı." for g, s, n in small.itertuples(index=False))
+    _finish(
+        fig, ax, "Productivity'de büyüdükçe reklamsız/IAP'siz pay düşüyor, Finance'ta düşmüyor",
+        f"Productivity'de reklamsız/IAP'siz pay <100K grubunda %{p.loc[('Productivity', '<100K'), 'free_clean']:.0f}, "
+        f"1M+ grubunda %{p.loc[('Productivity', '1M+'), 'free_clean']:.0f}; Finance'ta %{p.loc[('Finance', '<100K'), 'free_clean']:.0f} ve "
+        f"%{p.loc[('Finance', '1M+'), 'free_clean']:.0f}. Gruplar: <100K = 1,000+ ile 50,000+ arası bantlar, 100K-1M = 100,000+ ve 500,000+, 1M+ = 1,000,000+ ve üstü."
+        + small_note,
+        path,
+    )
+    return t
+
+
 if __name__ == "__main__":
     from queries import run
 
@@ -184,4 +225,5 @@ if __name__ == "__main__":
     fig_genre_monetization()
     fig_focus_genres(run("Q10"))
     fig_stale_by_band()
+    fig_focus_by_size()
     print(*sorted(p.name for p in FIG_DIR.glob("*.png")), sep="\n")

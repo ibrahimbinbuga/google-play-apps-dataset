@@ -169,6 +169,17 @@ Başlangıç: 2026-10-30
   - Oyunlar (n=14,728) free_clean %10.5, reklam %78.9, IAP %44.7; uygulamalar (n=85,285) %56.1, %37.3, %14.0.
 - Süre: ~20 dk
 
+### 2026-10-31 | Büyüklük kırılımı (README, grafik, dashboard) ve YORUM.md
+- Yapılan:
+  - `src/figures.py`: `fig_focus_by_size` → `figures/05_focus_genres_by_size.png` (Productivity, Finance, Entertainment × <100K / 100K-1M / 1M+). Okuma notları artık `textwrap` ile 150 karakterde bölünüyor; uzun notlu grafik yana taşmıştı. 5 grafik yeniden üretildi.
+  - `app/dashboard.py`: "Kurulum bandı" sekmesine "3 büyüklük grubu / 15 kurulum bandı" seçimi eklendi (varsayılan 3 grup); tür filtresiyle her tür için çalışıyor.
+  - README ürün çıkarımına büyüklük tablosu, grafik 05 ve dashboard yönlendirmesi eklendi; uygulama maddeleri büyüklüğe göre yeniden yazıldı.
+  - `YORUM.md`: veriden çıkarılabilecekler (9 madde) ve söylenemeyenler, Türkçe.
+  - Notebook grafik hücresine 05 eklendi, baştan çalıştırıldı (20/20 hücre, 0 hata).
+- Bulunan: Dashboard'un özet tablodan hesapladığı grup oranları SQL ile birebir aynı (ör. Productivity 1M+ free_clean %25.1, n=195). AppTest: Productivity seçimi n = 4,720, iki görünüm de hatasız.
+- Sorun: Grafik 05'te ilk sürümde okuma notu tek satırda çok uzundu; satır bölme ile düzeltildi ve gözle kontrol edildi.
+- Süre: ~40 dk
+
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)
 - Tipler: `is_game`, `free`, `contains_ads`, `offers_iap` bool olarak okunuyor. `score/ratings/reviews/price` float (eksik değer yüzünden `ratings/reviews` int değil). `released`, `last_updated` str, hepsi `YYYY-MM-DD` olarak sorunsuz parse ediliyor.

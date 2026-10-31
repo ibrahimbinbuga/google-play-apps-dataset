@@ -23,6 +23,7 @@ LABELS = {
 COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4"]
 MIN_GENRE_N = 200
 GENERIC_DEVELOPER = "Individual developer"
+SIZE_GROUPS = ["<100K", "100K-1M", "1M+"]  # band_rank 1-4, 5-6, 7-15
 
 st.set_page_config(page_title="Google Play gelir modeli", layout="wide")
 
@@ -126,13 +127,24 @@ with tab_genre:
         st.caption(f"n < {MIN_GENRE_N} olduğu için gösterilmeyen türler: {', '.join(small)}")
 
 with tab_band:
-    t = share_table(f, "installs")
-    sort = [lbl for b in bands for lbl in t.loc[t["installs"] == b, "axis_label"].unique()]
     st.subheader("Kurulum bandına göre gelir modeli dağılımı")
-    st.altair_chart(stacked_chart(t, sort, "Kurulum bandı (alt sınır)"), width="stretch")
+    grouping = st.radio(
+        "Görünüm", ["3 büyüklük grubu", "15 kurulum bandı"], horizontal=True,
+        help="Gruplar: <100K = 1,000+ ile 50,000+ arası bantlar, 100K-1M = 100,000+ ve 500,000+, 1M+ = 1,000,000+ ve üstü.",
+    )
+    if grouping == "3 büyüklük grubu":
+        g = f.assign(size_group=pd.cut(f["band_rank"], [0, 4, 6, 15], labels=SIZE_GROUPS).astype(str))
+        t = share_table(g, "size_group")
+        sort = [lbl for s in SIZE_GROUPS for lbl in t.loc[t["size_group"] == s, "axis_label"].unique()]
+        st.altair_chart(stacked_chart(t, sort, "Kurulum bandı grubu"), width="stretch")
+    else:
+        t = share_table(f, "installs")
+        sort = [lbl for b in bands for lbl in t.loc[t["installs"] == b, "axis_label"].unique()]
+        st.altair_chart(stacked_chart(t, sort, "Kurulum bandı (alt sınır)"), width="stretch")
     st.caption(
-        f"Okuma: bant alt sınırı küçükten büyüğe. Bantlar tam sayı değil, geniş aralık (1,000,000+ ≈ 1M-5M). "
-        f"n < {MIN_GENRE_N} olan bantların yüzdeleri dalgalı, n'e bakarak okuyun. n = {total_n:,}."
+        f"Okuma: küçükten büyüğe. Bantlar tam sayı değil, geniş aralık (1,000,000+ ≈ 1M-5M). "
+        f"Bir türün büyüklüğe göre profilini görmek için üstten tür seçin; toplam oranlar küçük uygulamaların ağırlığını taşır. "
+        f"n < {MIN_GENRE_N} olan grupların yüzdeleri dalgalı, n'e bakarak okuyun. n = {total_n:,}."
     )
 
 with tab_dev:

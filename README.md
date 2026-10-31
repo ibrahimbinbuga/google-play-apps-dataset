@@ -69,9 +69,31 @@ I compared the Productivity, Finance and Entertainment monetization profiles wit
 | Entertainment (5,106) | 34.6% | 48.0% | 10.6% | 6.5% | 0.4% |
 | All apps (100,013) | 49.4% | 30.9% | 12.5% | 5.8% | 1.5% |
 
-- **SpendWise** (bill and subscription tracker, iOS) → Finance. In this sample, 80% of Finance apps use neither ads nor IAP. The data does not show how many of them are stand-alone trackers like SpendWise and how many are companion apps for a bank or a service, so this norm is weak context.
-- **PomoQuest** (gamified Pomodoro timer, iOS) → Productivity. IAP only (7.6%) is a small but above-average share in Productivity. The game-like design does not move it into game genres, where ads dominate.
-- **Pairplot** (shared watchlist for couples, Flutter iOS + Android) → Entertainment. This is the most ad-heavy of the three genres (48% ads only), so going without ads would set it apart from most of the genre. The data cannot say whether that helps.
+**The genre average hides app size.** Most apps in every genre are small, so the genre totals above mostly describe apps under 100K installs. Split by size, Productivity and Entertainment change a lot, Finance does not:
+
+| Genre · installs (n) | No ads, no IAP | Ads only | Ads + IAP | IAP only | Paid |
+|---|---|---|---|---|---|
+| Productivity · <100K (4,077) | 68.2% | 17.6% | 6.7% | 6.8% | 0.8% |
+| Productivity · 100K-1M (448) | 46.4% | 21.2% | 19.9% | 10.9% | 1.6% |
+| Productivity · 1M+ (195)* | 25.1% | 22.1% | 36.4% | 16.4% | 0.0% |
+| Finance · <100K (3,747) | 80.0% | 13.9% | 3.2% | 2.5% | 0.3% |
+| Finance · 100K-1M (726) | 78.7% | 14.5% | 5.0% | 1.9% | 0.0% |
+| Finance · 1M+ (274) | 85.8% | 8.8% | 3.3% | 2.2% | 0.0% |
+| Entertainment · <100K (3,808) | 40.7% | 46.0% | 7.2% | 5.6% | 0.5% |
+| Entertainment · 100K-1M (911) | 17.3% | 57.5% | 17.5% | 7.7% | 0.0% |
+| Entertainment · 1M+ (387) | 15.0% | 44.7% | 27.6% | 12.7% | 0.0% |
+
+<sub>Size groups: <100K = bands 1,000+ to 50,000+; 100K-1M = 100,000+ and 500,000+; 1M+ = 1,000,000+ and above. \*n < 200, read with care.</sub>
+
+![Focus genres by install size](figures/05_focus_genres_by_size.png)
+
+The dashboard shows this split for any genre: pick a genre, then open the install band tab (3 size groups view).
+
+- **SpendWise** (bill and subscription tracker, iOS) → Finance. In this sample, Finance stays mostly free of ads and IAP at every size (86% at 1M+). The large ones are likely banks and service companies whose app is a channel for another product, but the data does not show that directly. Either way, this norm says little about a stand-alone tracker like SpendWise.
+- **PomoQuest** (gamified Pomodoro timer, iOS) → Productivity. The genre average (64% no ads, no IAP) comes mostly from small apps. Among Productivity apps with 1M+ installs, only 25% use neither; 36% combine ads and IAP and 16% use IAP only (n = 195). The game-like design does not move it into game genres, where ads dominate.
+- **Pairplot** (shared watchlist for couples, Flutter iOS + Android) → Entertainment. Ads only is the largest model at every size (45-58%), and only 15% of 1M+ Entertainment apps use neither ads nor IAP. Going without ads would set it apart from most of the genre. The data cannot say whether that helps.
+
+My longer notes on what this data can and cannot say are in [`YORUM.md`](YORUM.md) (Turkish).
 
 ## SQL
 The cleaned data is loaded into four normalized SQLite tables ([`sql/schema.sql`](sql/schema.sql)):
@@ -96,7 +118,7 @@ apps ──┬── developers     (developer_id = developer + domain pair)
 ## Dashboard
 **Live: [app-play-apps-dataset.streamlit.app](https://app-play-apps-dataset.streamlit.app)**
 
-A Streamlit dashboard ([`app/dashboard.py`](app/dashboard.py)) with three tabs (genre × monetization, install band × monetization, developer concentration) and filters for genre, game/app and install band. Every chart shows n, and a fixed note at the top states the sample design.
+A Streamlit dashboard ([`app/dashboard.py`](app/dashboard.py)) with three tabs (genre × monetization, install band × monetization with a 3 size groups view, developer concentration) and filters for genre, game/app and install band. Every chart shows n, and a fixed note at the top states the sample design.
 
 The dashboard **never reads raw rows**. It reads one summary table, [`app/summary/developer_cells.csv.gz`](app/summary/), built by [`src/build_summaries.py`](src/build_summaries.py): app counts per developer × genre × install band × monetization (69,841 cells, n = 100,013). It has no app names or IDs. Developer names are shown only for developers with at least 20 apps in the sample (389 of 47,956); the rest appear as `Geliştirici #<number>`. This is why it can run without `data/` and can be deployed publicly.
 
@@ -138,9 +160,10 @@ streamlit run app/dashboard.py
 ├── sql/schema.sql            normalized SQLite schema
 ├── sql/queries.sql           10 SQL questions
 ├── src/                      pipeline modules (validate, clean, sample_check, load_db, queries, figures, build_summaries)
-├── figures/                  4 charts
+├── figures/                  5 charts
 ├── data/                     raw and generated data (git-ignored)
 ├── DEVLOG.md                 decisions, assumptions and step log (Turkish)
+├── YORUM.md                  interpretation notes (Turkish)
 └── 05-kalite-kontrol.md      QA checklist (Turkish)
 ```
 

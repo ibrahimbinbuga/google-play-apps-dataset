@@ -3,10 +3,10 @@
 Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`, `apps.db`) ve `figures/*.png` silindi, ham CSV tutuldu, sonra `jupyter nbconvert --to notebook --execute --inplace notebooks/analysis.ipynb` çalıştırıldı.
 
 ## Notebook
-- [x] Baştan sona hatasız çalışıyor: 19 kod hücresinin 19'u çalıştı, 0 hata, 0 stderr çıktısı
-- [x] Çalışma sırası sıralı (1..19), elle çalıştırılmış eski hücre yok
+- [x] Baştan sona hatasız çalışıyor: 20 kod hücresinin 20'si çalıştı, 0 hata, 0 stderr çıktısı (son çalıştırma 2026-10-31, grafik 05 ve özet tablo dahil)
+- [x] Çalışma sırası sıralı (1..20), elle çalıştırılmış eski hücre yok
 - [x] `apps_clean.csv` ve `apps.db` yeniden üretildi (100,013 satır, FK hatası 0)
-- [x] 4 grafik `figures/` altında yeniden üretildi
+- [x] 5 grafik `figures/` altında yeniden üretildi (05 büyüklük kırılımı, 2026-10-31 eklendi)
 - [x] Mantık `src/` modüllerinde (`validate`, `clean`, `sample_check`, `load_db`, `queries`, `figures`); notebook sadece fonksiyonları çağırıyor
 - [x] README ve DEVLOG'daki 14 ana sayı (Q2, Q9, Q10, örneklem sağlaması) notebook çıktısında birebir bulunuyor
 
@@ -24,7 +24,7 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 - [x] `Individual developer` genel etiketi geliştirici sıralamasında ayrı raporlandı
 
 ## Grafikler (kural 5)
-- [x] 4 grafiğin hepsinde başlık, eksen adı ve birim var
+- [x] 5 grafiğin hepsinde başlık, eksen adı ve birim var; okuma notları 150 karakterde satıra bölünüyor
 - [x] Her çubukta n görünüyor; altta tek cümlelik okuma notu ve örneklem notu var
 - [x] Okuma notundaki sayılar koddan geliyor (f-string), elle yazılmadı
 - [x] Renk paleti renk körlüğü için doğrulandı; düşük kontrastlı renkler için segmentlerde doğrudan yüzde etiketi var
