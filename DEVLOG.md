@@ -157,7 +157,7 @@ Başlangıç: 2026-10-30
 ### 2026-10-31 | Dashboard yayında
 - Yapılan: İbrahim uygulamayı Streamlit Community Cloud'a bağladı: https://app-play-apps-dataset.streamlit.app. README'ye rozet ve canlı link, kontrol listesine kayıt eklendi.
 - Bulunan: Anonim istek önce Cloud'un çerez/giriş yönlendirmesinden geçiyor (303), çerezle sayfa 200 dönüyor; uygulamanın kendi sağlık kontrolü (`/~/+/_stcore/health`) `ok`. Yani giriş gerekmeden açık.
-- Sorun: Sayfa JavaScript ile çizildiği için içerik bu oturumda gözle kontrol edilmedi.
+- Sorun: Sayfa JavaScript ile çizildiği için içerik bu oturumda gözle kontrol edilemedi; İbrahim tarayıcıda açıp kontrol etti (uyarı notu, 3 sekme, filtreler ve n, geliştirici tablosu), sorun yok.
 - Süre: ~10 dk
 
 ## Veri kalite notları
