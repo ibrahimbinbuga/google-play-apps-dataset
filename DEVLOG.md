@@ -135,6 +135,12 @@ Başlangıç: 2026-10-30
 - Süre: ~20 dk
 - Sonraki: İbrahim'in açık kararları. Kapsam dışı kalanlar "Sonraki adımlar"da.
 
+### 2026-10-31 | GitHub'a yükleme
+- Yapılan: README yeniden düzenlendi (rozetler, örneklem uyarısı, "At a glance" tablosu, gelir modeli tanımı, bulgulara gömülü grafikler, SQL ve dashboard bölümleri, klasör yapısı, lisans). `git init`, ilk commit, `gh repo create --public` ile https://github.com/ibrahimbinbuga/google-play-apps-dataset oluşturuldu ve push edildi. `linkedin-post.txt` `.gitignore`'a eklendi.
+- Kararlar: repo herkese açık (İbrahim seçti). Notebook çıktıları repoda tutuldu. `data/` repoya girmedi. Dashboard yayınlanmadı, yalnızca kodu repoda.
+- Sorun: Herkese açık repo oluşturma adımı önce izin sisteminde onaya takıldı, İbrahim'e soruldu ve onaylandı.
+- Süre: ~20 dk
+
 ## Veri kalite notları
 - Satır/sütun: 100,013 x 19, dosya 20,016,745 bayt (Adım 2, `src/validate.py`)
 - Tipler: `is_game`, `free`, `contains_ads`, `offers_iap` bool olarak okunuyor. `score/ratings/reviews/price` float (eksik değer yüzünden `ratings/reviews` int değil). `released`, `last_updated` str, hepsi `YYYY-MM-DD` olarak sorunsuz parse ediliyor.

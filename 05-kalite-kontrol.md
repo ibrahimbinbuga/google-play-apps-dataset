@@ -44,7 +44,7 @@ Temiz çalıştırma: `data/` altındaki üretilmiş dosyalar (`apps_clean.csv`,
 - [x] ML yok; yalnızca tanımlayıcı oranlar
 
 ## Açık kalanlar
-- [ ] Repo: klasör henüz git reposu değil (`git init` İbrahim'de)
-- [ ] Notebook çıktıları ~976 KB (gömülü grafikler). Repoda tutulup tutulmayacağı İbrahim'in kararı
+- [x] Repo: https://github.com/ibrahimbinbuga/google-play-apps-dataset (herkese açık, İbrahim onayladı, 2026-10-31)
+- [x] Notebook çıktıları (~976 KB, gömülü grafikler) repoda tutuldu; GitHub'da çalıştırmadan okunabilsin diye (ai-usage-data ile aynı karar)
 - [ ] Dashboard'u herkese açık yayınlama (özet tablolara geçiş gerekir), İbrahim'in kararı
 - [ ] Lisans çelişkisi (Kaggle BY-NC-SA vs REPORT.md BY-NC): Kaggle sayfasındaki lisans kutusuna gözle bakılmalı
